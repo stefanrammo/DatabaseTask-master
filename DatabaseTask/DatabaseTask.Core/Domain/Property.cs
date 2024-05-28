@@ -13,7 +13,7 @@ namespace DatabaseTask.Core.Domain
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int PropertyId { get; set; }
 
         public int ObjectId { get; set; }
 
@@ -31,6 +31,6 @@ namespace DatabaseTask.Core.Domain
         [StringLength(255)]
         public string? Comment { get; set; }
 
-        public ICollection<Renting>? Rentings { get; set; }
+        public virtual ICollection<Renting> Rentings { get; set; }
     }
 }

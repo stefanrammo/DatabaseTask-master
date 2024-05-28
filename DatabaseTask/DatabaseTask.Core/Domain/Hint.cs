@@ -12,19 +12,19 @@ namespace DatabaseTask.Core.Domain
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int HintId { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
         public string? HintText { get; set; }
 
-        public int HintId { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
         public string? Comment { get; set; }
 
-        [ForeignKey("Firm")]
-        public Firm? Firm { get; set; }
+        public int FirmId { get; set; }
+        [ForeignKey("FirmId")]
+        public virtual Firm Firm { get; set; }
     }
 }

@@ -12,20 +12,16 @@ namespace DatabaseTask.Core.Domain
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int FirmId { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
         public string? RegistryType { get; set; }
 
-        public int FirmId { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
         public string? Name { get; set; }
-
-        [ForeignKey("BranchOffice")]
-        public BranchOffice? BranchOffice { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
@@ -42,6 +38,7 @@ namespace DatabaseTask.Core.Domain
         [StringLength(255)]
         public string? Comment { get; set; }
 
-        public ICollection<Hint>? Hints { get; set; }
+        public virtual ICollection<BranchOffice> BranchOffices { get; set; }
+        public virtual ICollection<Hint> Hints { get; set; }
     }
 }

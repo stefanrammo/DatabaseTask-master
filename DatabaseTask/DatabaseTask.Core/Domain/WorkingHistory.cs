@@ -9,22 +9,22 @@ namespace DatabaseTask.Core.Domain
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int WorkingHistoryId { get; set; }
 
-        public Guid JobTitleId { get; set; }
-        [ForeignKey(nameof(JobTitleId))]
-        public JobTitle? JobTitle { get; set; }
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
+
+        public int JobTitleId { get; set; }
+        [ForeignKey("JobTitleId")]
+        public virtual JobTitle JobTitle { get; set; }
 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        [ForeignKey("Employee")]
-        public Employee? Employee { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
         public string? Comment { get; set; }
-
-        public ICollection<JobTitle> JobTitles { get; set; } = new HashSet<JobTitle>();
     }
 }

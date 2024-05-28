@@ -9,7 +9,7 @@ namespace DatabaseTask.Core.Domain
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int JobTitleId { get; set; }
 
         [Column(TypeName = "VARCHAR(255)")]
         [StringLength(255)]
@@ -24,10 +24,15 @@ namespace DatabaseTask.Core.Domain
         [Column(TypeName = "VARCHAR(255)")]
         public string? Comment { get; set; }
 
-        [ForeignKey("Employee")]
-        public Employee? Employee { get; set; }
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
 
-        public ICollection<WorkingHistory> WorkingHistories { get; set; } = new HashSet<WorkingHistory>();
-        public ICollection<AccessPermission> AccessPermissions { get; set; } = new HashSet<AccessPermission>();
+        public int AccessPermissionId { get; set; }
+        [ForeignKey("AccessPermissionId")]
+        public virtual AccessPermission AccessPermission { get; set; }
+
+        public virtual ICollection<WorkingHistory> WorkingHistories { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; } // Add this line
     }
 }

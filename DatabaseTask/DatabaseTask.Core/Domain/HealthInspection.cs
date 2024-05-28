@@ -12,10 +12,11 @@ namespace DatabaseTask.Core.Domain
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int HealthInspectionId { get; set; }
 
-        [ForeignKey("Employee")]
-        public Employee? Employee { get; set; }
+        public int EmployeeId { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual Employee Employee { get; set; }
 
         public DateTime LastInspection { get; set; }
         public DateTime NewInspectionDate { get; set; }

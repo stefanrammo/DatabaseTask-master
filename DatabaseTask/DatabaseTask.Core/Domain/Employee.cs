@@ -7,10 +7,9 @@ namespace DatabaseTask.Core.Domain
 {
     public class Employee
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int EmployeeId { get; set; }
 
         public int EmployeeNumber { get; set; }
 
@@ -41,20 +40,26 @@ namespace DatabaseTask.Core.Domain
         [Column(TypeName = "VARCHAR(255)")]
         public string? Comment { get; set; }
 
-        [ForeignKey("BranchOffice")]
-        public BranchOffice? BranchOffice { get; set; }
+        public virtual ICollection<AccessPermission> AccessPermissions { get; set; }
 
-        public ICollection<AccessPermission>? AccessPermissions { get; set; }
-        public ICollection<EmployeeChild>? EmployeeChildren { get; set; }
-        public ICollection<HealthInspection>? HealthInspections { get; set; }
-        public ICollection<Holiday>? Holidays { get; set; }
-        public ICollection<JobTitle>? JobTitles { get; set; }
-        public ICollection<Renting>? Rentings { get; set; }
-        public ICollection<Request>? Requests { get; set; }
-        public ICollection<SickLeave>? SickLeaves { get; set; }
-        public ICollection<WorkingHistory>? WorkingHistories { get; set; }
+        public int JobTitleId { get; set; }
+        [ForeignKey("JobTitleId")]
+        public virtual JobTitle JobTitle { get; set; }
+
+        public virtual ICollection<WorkingHistory> WorkingHistories { get; set; }
+        public virtual ICollection<EmployeeChild> EmployeeChildren { get; set; }
+        public virtual ICollection<SickLeave> SickLeaves { get; set; }
+        public virtual ICollection<Holiday> Holidays { get; set; }
+        public virtual ICollection<HealthInspection> HealthInspections { get; set; }
+        public virtual ICollection<Renting> Rentings { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
+
+        public int BranchOfficeId { get; set; }
+        [ForeignKey("BranchOfficeId")]
+        public virtual BranchOffice BranchOffice { get; set; }
     }
 }
+
 
 
 
